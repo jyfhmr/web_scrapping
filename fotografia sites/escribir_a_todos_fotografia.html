@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-size: 42px;
+        }
+    </style>
+</head>
+<body>
+
+     <div id="contadord">Contador: </div>
+
+     <button id="pasardelante">Pasar delante</button>
+     <button id="abrirChat">Abrir Chat</button>
+
+    <script>
+
+        const contadord = document.getElementById("contadord")
+        const abrirChat = document.getElementById("abrirChat")
+
+        function obtenerNumeros(telefonoString) {
+
+    // Dividir la cadena por saltos de línea para obtener cada número de teléfono
+    const lineas = telefonoString.split('\n');
+
+    // Inicializar un arreglo para almacenar los números de teléfono limpios
+    const numerosArray = [];
+
+    // Iterar sobre cada número de teléfono en la cadena
+    lineas.forEach(linea => {
+
+        // Eliminar guiones, espacios en blanco y "+" de la línea
+        const numeroLimpio = linea.replace(/[-\s+]/g, '');
+
+        // Agregar el número limpio al arreglo
+        numerosArray.push(numeroLimpio);
+    });
+
+    return numerosArray;
+}
+
+
+
+const stringTelefonos = `
+
+`
+
+
+const numeros = obtenerNumeros(stringTelefonos);
+console.log(numeros);
+
+
+let contador = 0
+
+let url = `https://api.whatsapp.com/send?phone=${numeros[contador]}`
+
+contadord.textContent = "Contador "+contador
+
+
+const pasardelante = document.getElementById("pasardelante")
+
+pasardelante.addEventListener("click",()=>{
+   contador = contador+1
+   contadord.textContent = "Contador "+ contador
+   url =  `whatsapp://send?phone=${numeros[contador]}&text=Buenos días!, conseguí este contacto en Google Maps, Le escribo para poner a disposición mis servicios como programador, me especializo en crear tanto aplicaciones como sitios web, si le resulta conveniente tener un programador en su equipo, le puedo facilitar mi portafolio`
+   console.log(url)
+})
+
+abrirChat.addEventListener("click",()=>{
+    window.open(url)
+})
+
+  
+
+     </script>   
+</body>
+</html>
