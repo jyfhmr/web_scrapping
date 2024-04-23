@@ -41,10 +41,13 @@ async function scrapeGoogleMaps() {
             textObject.Nombre = nrDZNbText || 'NOCONOCIDO';
         
             // Busca el texto del elemento .UsdlK dentro del elemento padre .Z8fK3b
-            const usdlKText = $(parentElement).find('.UsdlK').text().trim();
-            var cleanedText = (usdlKText.replace(/\s+/g, '').replace(/\+/g, ''))+",";
-            if(cleanedText == ","){cleanedText = "584123091835," }
-            textObject.Tlf = cleanedText ;
+           const usdlKText = $(parentElement).find('.UsdlK').text().trim();
+var cleanedText = usdlKText.replace(/[+\s-]/g, '') + ",";
+if (cleanedText === ",") {
+  cleanedText = "584123091835,";
+}
+textObject.Tlf = cleanedText;
+
         
             // Busca el primer elemento de la clase .Rwjeuc
             const rwjeucElement = $(".Rwjeuc").eq(index);
